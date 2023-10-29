@@ -1,3 +1,3 @@
 ﻿using Non_coop.Multithread;
 
-new SupermarketInventory().Sales();
+new SupermarketInventory(2).Sales();
