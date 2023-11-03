@@ -2,34 +2,19 @@
 
 internal class Program
 {
-    private static void Test100Threads()
+    private static string total = string.Empty;
+    private static void TestNThreads(int threadCount, int threadRuns)
     {
         DateTime start = DateTime.Now;
-        new SupermarketInventory(128, 5120).Sales();
+        new SupermarketInventory(threadCount, threadRuns).Sales();
         DateTime end = DateTime.Now;
-        Console.WriteLine("Time elapsed for 128 threads: {0}", end - start);
+        total += string.Format("Time elapsed for {0} threads: {1}\n", threadCount, end - start);
     }
-
-    private static void Test200Threads()
-    {
-        DateTime start = DateTime.Now;
-        new SupermarketInventory(256, 2560).Sales();
-        DateTime end = DateTime.Now;
-        Console.WriteLine("Time elapsed for 256 threads: {0}", end - start);
-    }
-
-    private static void Test400Threads()
-    {
-        DateTime start = DateTime.Now;
-        new SupermarketInventory(512, 1280).Sales();
-        DateTime end = DateTime.Now;
-        Console.WriteLine("Time elapsed for 512 threads: {0}", end - start);
-    }
-
     private static void Main(string[] args)
     {
-        Test100Threads();
-        Test200Threads();
-        Test400Threads();
+        TestNThreads(128, 51200);
+        TestNThreads(256, 25600);
+        TestNThreads(512, 12800);
+        System.Console.WriteLine(total);
     }
 }

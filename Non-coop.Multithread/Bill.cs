@@ -5,7 +5,6 @@ namespace Non_coop.Multithread
         public List<Product> ProductsSold { get; set; } = new();
         public List<int> QuantitiesSold { get; set; } = new();
         public int BillPrice { get; set; } = 0;
-        public ReaderWriterLockSlim Lock { get; set; } = new();
         public override string ToString()
         {
             string fin = "";

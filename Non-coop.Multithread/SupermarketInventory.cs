@@ -83,7 +83,7 @@ namespace Non_coop.Multithread
                     try
                     {
                         InventoryLock.TryEnterReadLock(readerTimeOut);
-                        // Inventory();
+                        Inventory();
                         InventoryLock.ExitReadLock();
                     }
                     catch (ApplicationException)
@@ -98,7 +98,7 @@ namespace Non_coop.Multithread
         {
             try
             {
-                // Bill handling
+                // Bill and product handling
                 BillsLock.TryEnterWriteLock(writerTimeOut);
                 currentBill = new();
 
@@ -136,7 +136,7 @@ namespace Non_coop.Multithread
             currentBill = new();
             try
             {
-                // Bill handling
+                // Bill and product handling
                 BillsLock.TryEnterWriteLock(writerTimeOut);
                 currentBill = new();
 
