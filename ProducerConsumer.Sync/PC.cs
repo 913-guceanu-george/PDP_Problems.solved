@@ -2,49 +2,69 @@ namespace ProducerConsumer.Sync
 {
     public static class PC
     {
-        private static int[] vectorA = { 1, 2, 3, 4, 5 }; // Sample vector A
+        // private static int[] VectorA = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }; // Sample vector A
+        // private static int[] vectorB = { 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 }; // Sample vector B
+        private static int[] VectorA = { 1, 2, 3, 4, 5 }; // Sample vector A
         private static int[] vectorB = { 5, 4, 3, 2, 1 }; // Sample vector B
-        private static int[] products = new int[vectorA.Length]; // Array to store products
-        private static bool produced = false; // Flag to indicate if products have been produced
-        private static int sum = 0; // Sum of products
-        private static Mutex mutex = new(); // Mutex to control access to products array
+        private static int[] Products = new int[VectorA.Length]; // Array to store Products
+        private static readonly Thread ProducerThread = new(Producer) { Name = "Producer" };
+        private static readonly Thread ConsumerThread = new(Consumer) { Name = "Consumer" };
+        private static object cond = new();
+        private static int sum = 0; // Sum of Products
 
         public static void Run()
         {
-            Thread producer = new(Producer);
-            Thread consumer = new(Consumer);
+            Thread.CurrentThread.Name = "Main";
 
-            producer.Start();
-            consumer.Start();
+            ProducerThread.Start();
+            ConsumerThread.Start();
 
-            producer.Join();
-            consumer.Join();
-            Console.WriteLine($"Sum of products is {sum}");
+            ProducerThread.Join();
+            ConsumerThread.Join();
         }
 
         private static void Producer()
         {
-            for (int i = 0; i < vectorA.Length; i++)
+            while (!ConsumerThread.IsAlive)
             {
-                mutex.WaitOne(); // Wait for mutex to be available
-                products[i] = vectorA[i] * vectorB[i];
-                produced = true;
-                mutex.ReleaseMutex(); // Release mutex
+                Thread.Sleep(1000);
+            }
+            for (int i = 0; i < VectorA.Length; i++)
+            {
+                lock (cond)
+                {
+                    Monitor.PulseAll(cond);
+                    Console.WriteLine($"Producer: {i}");
+                    Products[i] = VectorA[i] * vectorB[i];
+                    Thread.Sleep(1000);
+                    Monitor.Wait(cond);
+                }
+            }
+            while (ConsumerThread.IsAlive)
+            {
+                lock (cond)
+                {
+                    Monitor.Pulse(cond);
+                }
             }
         }
 
         private static void Consumer()
         {
-            for (int i = 0; i < vectorA.Length; i++)
+            for (int i = 0; i < VectorA.Length; i++)
             {
-                while (!produced)
-                    mutex.WaitOne(); // Wait for mutex to be available
-                Console.WriteLine($"Product of {vectorA[i]} and {vectorB[i]} is {products[i]}");
-                sum += products[i];
-                produced = false;
-                mutex.ReleaseMutex(); // Release mutex
+                lock (cond)
+                {
+                    Monitor.PulseAll(cond);
+                    Console.WriteLine($"Consumer: {i}");
+                    sum += Products[i];
+                    Thread.Sleep(1000);
+                    Console.WriteLine($"Product of {VectorA[i]} and {vectorB[i]} is {Products[i]}");
+                    Monitor.Wait(cond);
+                }
             }
-        }
+            Console.WriteLine($"Sum of products is {sum}");
 
+        }
     }
 }

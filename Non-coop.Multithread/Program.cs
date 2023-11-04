@@ -12,9 +12,11 @@ internal class Program
     }
     private static void Main(string[] args)
     {
-        TestNThreads(128, 51200);
-        TestNThreads(256, 25600);
-        TestNThreads(512, 12800);
-        System.Console.WriteLine(total);
+        TestNThreads(64, 102400);
+        // TestNThreads(128, 51200);
+        // TestNThreads(256, 25600);
+        // TestNThreads(512, 12800);
+        // TestNThreads(2, 10);
+        Console.WriteLine(total);
     }
 }

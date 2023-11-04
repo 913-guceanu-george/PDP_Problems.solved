@@ -9,14 +9,13 @@ namespace Non_coop.Multithread
             ThreadRuns = threadRuns;
         }
 
-        private static Bill currentBill { get; set; } = new();
         private int Money { get; set; } = 0;
         private int ThreadRuns { get; set; }
         private int NumThreads { get; set; }
+        private List<Bill> Bills { get; set; } = new List<Bill>();
         private static int readerTimeOut = 100000;
         private static int writerTimeOut = 100000;
         private static ReaderWriterLockSlim InventoryLock { get; set; } = new();
-        private List<Bill> Bills { get; set; } = new List<Bill>();
         private static ReaderWriterLockSlim BillsLock { get; set; } = new();
         private static Product Milk { get; set; } = new Product { Type = "Milk", UnitPrice = 5, Quantity = 1054509 };
         private static Product Bread { get; set; } = new Product { Type = "Bread", UnitPrice = 6, Quantity = 1219789 };
@@ -48,12 +47,12 @@ namespace Non_coop.Multithread
             }
             for (int i = 0; i < NumThreads; i++)
                 threads[i].Join();
-            Console.WriteLine("-------FINAL INVENTORY--------");
             try
             {
 
                 InventoryLock.TryEnterReadLock(readerTimeOut);
-                // Inventory();
+                // Console.WriteLine("-------FI`NAL INVENTORY--------");
+                Inventory();
                 InventoryLock.ExitReadLock();
             }
             catch (ApplicationException)
@@ -69,7 +68,7 @@ namespace Non_coop.Multithread
             {
                 // If the number i is prime we will add only milk, bread and pasta, to a bill, otherwise all the rest
                 // Also if the number i can be divided by 3 and inventory will be done
-                if (i % 2 == 0 || i % 5 == 0 || Thread.CurrentThread.Name!.Equals("2"))
+                if (i % 2 == 0 || i % 5 == 0 || Thread.CurrentThread.Name!.Contains("13"))
                 {
                     SaleType1(i);
                 }
@@ -77,7 +76,6 @@ namespace Non_coop.Multithread
                 {
                     SaleType2(i);
                 }
-                Money += currentBill.BillPrice;
                 if (IsPrime(i))
                 {
                     try
@@ -99,30 +97,37 @@ namespace Non_coop.Multithread
             try
             {
                 // Bill and product handling
+                // BillsLock.TryEnterWriteLock(writerTimeOut);
+                Bill Sale1Bill = new();
+                // BillsLock.ExitWriteLock();
+
                 BillsLock.TryEnterWriteLock(writerTimeOut);
-                currentBill = new();
-
-
-                currentBill.QuantitiesSold.Add(2 + i);
-                currentBill.ProductsSold.Add(Milk.Copy(Milk));
-                currentBill.BillPrice += (2 + i) * Milk.UnitPrice;
-
+                Sale1Bill.QuantitiesSold.Add(2 + i);
+                Sale1Bill.ProductsSold.Add(Milk.Copy(Milk));
+                Sale1Bill.BillPrice += (2 + i) * Milk.UnitPrice;
                 Milk.Quantity -= 2 + i;
+                System.Console.WriteLine("Start: {0}", Thread.CurrentThread.Name);
+                Thread.Sleep(5000);
+                System.Console.WriteLine("Stop: {0}", Thread.CurrentThread.Name);
+                BillsLock.ExitWriteLock();
 
-                currentBill.QuantitiesSold.Add(4 + i);
-                currentBill.ProductsSold.Add(Bread.Copy(Bread));
-                currentBill.BillPrice += (4 + i) * Bread.UnitPrice;
-
+                BillsLock.TryEnterWriteLock(writerTimeOut);
+                Sale1Bill.QuantitiesSold.Add(4 + i);
+                Sale1Bill.ProductsSold.Add(Bread.Copy(Bread));
+                Sale1Bill.BillPrice += (4 + i) * Bread.UnitPrice;
                 Bread.Quantity -= 4 + i;
+                BillsLock.ExitWriteLock();
 
-                currentBill.QuantitiesSold.Add(5 + i);
-                currentBill.ProductsSold.Add(Pasta.Copy(Pasta));
-                currentBill.BillPrice += (5 + i) * Pasta.UnitPrice;
-
+                BillsLock.TryEnterWriteLock(writerTimeOut);
+                Sale1Bill.QuantitiesSold.Add(5 + i);
+                Sale1Bill.ProductsSold.Add(Pasta.Copy(Pasta));
+                Sale1Bill.BillPrice += (5 + i) * Pasta.UnitPrice;
                 Pasta.Quantity -= 5 + i;
+                BillsLock.ExitWriteLock();
 
-                Bills.Add(currentBill);
-
+                BillsLock.TryEnterWriteLock(writerTimeOut);
+                Money += Sale1Bill.BillPrice;
+                Bills.Add(Sale1Bill);
                 BillsLock.ExitWriteLock();
             }
             catch (ApplicationException)
@@ -133,26 +138,30 @@ namespace Non_coop.Multithread
 
         public void SaleType2(int i)
         {
-            currentBill = new();
             try
             {
                 // Bill and product handling
                 BillsLock.TryEnterWriteLock(writerTimeOut);
-                currentBill = new();
+                Bill Sale2Bill = new();
+                BillsLock.ExitWriteLock();
 
-                currentBill.QuantitiesSold.Add(5 + i);
-                currentBill.ProductsSold.Add(Water.Copy(Water));
-                currentBill.BillPrice += (5 + i) * Water.UnitPrice;
-
+                BillsLock.TryEnterWriteLock(writerTimeOut);
+                Sale2Bill.QuantitiesSold.Add(5 + i);
+                Sale2Bill.ProductsSold.Add(Water.Copy(Water));
+                Sale2Bill.BillPrice += (5 + i) * Water.UnitPrice;
                 Water.Quantity -= 5 + i;
+                BillsLock.ExitWriteLock();
 
-                currentBill.QuantitiesSold.Add(3 + i);
-                currentBill.ProductsSold.Add(Mug.Copy(Mug));
-                currentBill.BillPrice += (3 + i) * Mug.UnitPrice;
-
+                BillsLock.TryEnterWriteLock(writerTimeOut);
+                Sale2Bill.QuantitiesSold.Add(3 + i);
+                Sale2Bill.ProductsSold.Add(Mug.Copy(Mug));
+                Sale2Bill.BillPrice += (3 + i) * Mug.UnitPrice;
                 Mug.Quantity -= 3 + i;
+                BillsLock.ExitWriteLock();
 
-                Bills.Add(currentBill);
+                BillsLock.TryEnterWriteLock(writerTimeOut);
+                Money += Sale2Bill.BillPrice;
+                Bills.Add(Sale2Bill);
                 BillsLock.ExitWriteLock();
 
             }
@@ -166,12 +175,12 @@ namespace Non_coop.Multithread
         {
             int TotalSales = 0;
 
-            Console.WriteLine("\t\t\tINVENTORY\n");
+            // Console.WriteLine("\t\t\tINVENTORY\n");
             for (int i = 0; i < Bills.Count; i++)
             {
                 TotalSales += Bills[i].BillPrice;
             }
-            Console.WriteLine(string.Format("\n\nTotal Sales: {0}, Money made today: {0}", TotalSales, Money));
+            // Console.WriteLine(string.Format("\n\nTotal Sales: {0}, Money made today: {0}", TotalSales, Money));
             if (Money != TotalSales) return false;
             return true;
         }

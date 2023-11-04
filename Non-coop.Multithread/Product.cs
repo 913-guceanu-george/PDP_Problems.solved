@@ -5,6 +5,7 @@ namespace Non_coop.Multithread
         public string Type { get; set; } = string.Empty;
         public int UnitPrice { get; set; }
         public int Quantity { get; set; }
+        public static ReaderWriterLockSlim Lock = new();
         public Product Copy(Product toCopy)
         {
             return new Product { Type = toCopy.Type, UnitPrice = toCopy.UnitPrice, Quantity = toCopy.Quantity };
