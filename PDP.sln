@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Non-coop.Multithread", "Non
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProducerConsumer.Sync", "ProducerConsumer.Sync\ProducerConsumer.Sync.csproj", "{3762E889-6834-48BE-BF0B-43FBD40933FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futures.continuations", "Futures.continuations\Futures.continuations.csproj", "{A316181C-3EE8-4A85-A696-DD60E7537DFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple_parallel.tasks", "Simple_parallel.tasks\Simple_parallel.tasks.csproj", "{C4EF1B8A-6D6C-49D7-AF38-00F0F9910DEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{3762E889-6834-48BE-BF0B-43FBD40933FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3762E889-6834-48BE-BF0B-43FBD40933FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3762E889-6834-48BE-BF0B-43FBD40933FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A316181C-3EE8-4A85-A696-DD60E7537DFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A316181C-3EE8-4A85-A696-DD60E7537DFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A316181C-3EE8-4A85-A696-DD60E7537DFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A316181C-3EE8-4A85-A696-DD60E7537DFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4EF1B8A-6D6C-49D7-AF38-00F0F9910DEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4EF1B8A-6D6C-49D7-AF38-00F0F9910DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4EF1B8A-6D6C-49D7-AF38-00F0F9910DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4EF1B8A-6D6C-49D7-AF38-00F0F9910DEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
