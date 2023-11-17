@@ -11,6 +11,7 @@ namespace ProducerConsumer.Sync
         private static readonly Thread ConsumerThread = new(Consumer) { Name = "Consumer" };
         private static object cond = new();
         private static int sum = 0; // Sum of Products
+        private static bool isProduced = false;
 
         public static void Run()
         {
@@ -25,28 +26,22 @@ namespace ProducerConsumer.Sync
 
         private static void Producer()
         {
-            while (!ConsumerThread.IsAlive)
-            {
-                Thread.Sleep(1000);
-            }
+            // while (!ConsumerThread.IsAlive)
+            // {
+            //     Thread.Sleep(1000);
+            // }
             for (int i = 0; i < VectorA.Length; i++)
             {
                 lock (cond)
                 {
-                    Monitor.PulseAll(cond);
                     Console.WriteLine($"Producer: {i}");
                     Products[i] = VectorA[i] * vectorB[i];
-                    Thread.Sleep(1000);
-                    Monitor.Wait(cond);
+                    Monitor.PulseAll(cond);
+                    // Thread.Sleep(1000);
+                    // Monitor.Wait(cond);
                 }
             }
-            while (ConsumerThread.IsAlive)
-            {
-                lock (cond)
-                {
-                    Monitor.Pulse(cond);
-                }
-            }
+            isProduced = true;
         }
 
         private static void Consumer()
@@ -58,10 +53,11 @@ namespace ProducerConsumer.Sync
                     Monitor.PulseAll(cond);
                     Console.WriteLine($"Consumer: {i}");
                     sum += Products[i];
-                    Thread.Sleep(1000);
+                    // Thread.Sleep(1000);
                     Console.WriteLine($"Product of {VectorA[i]} and {vectorB[i]} is {Products[i]}");
                     Monitor.Wait(cond);
                 }
+                if (isProduced) break;
             }
             Console.WriteLine($"Sum of products is {sum}");
 
