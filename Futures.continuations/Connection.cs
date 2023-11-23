@@ -22,6 +22,6 @@ namespace Futures.continuations
             return Task.Factory.FromAsync(socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, null, null), socket.EndReceive);
         }
 
-        
+
     }
 }

@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "CwRKoN5RdcW4WIC9nxYKRvDPyfwYU1wZRzcf0RWAsxA5fEN813Ay6WDDr6akW9tIeTU7Gc9Vpbfv2mBXsPBUIA==",
+  "dgSpecHash": "ijLwfGqClmjyUp1N89Smsa0WcgdOd2FIEt5F7GKNgzsx4/pT/IKSEPHOHbOVgT/1wN7FC3EIL+q4pZETzQVS/g==",
   "success": true,
   "projectFilePath": "C:\\Users\\maria\\Documents\\Code\\PDP-Problems.solved\\Non-coop.Multithread\\Non-coop.Multithread.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\maria\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\maria\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\maria\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\maria\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.14\\microsoft.netcore.app.host.win-x64.7.0.14.nupkg.sha512"
+  ],
   "logs": []
 }
