@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Non-coop.Multithread", "Non
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProducerConsumer.Sync", "ProducerConsumer.Sync\ProducerConsumer.Sync.csproj", "{3762E889-6834-48BE-BF0B-43FBD40933FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futures.continuations", "Futures.continuations\Futures.continuations.csproj", "{A316181C-3EE8-4A85-A696-DD60E7537DFA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple_parallel.tasks", "Simple_parallel.tasks\Simple_parallel.tasks.csproj", "{C4EF1B8A-6D6C-49D7-AF38-00F0F9910DEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futures.continuations.Server", "Futures.continuations.Server\Futures.continuations.Server.csproj", "{61CFD21D-301D-4080-BF21-57F14D56A734}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futures.continuations.Client", "Futures.continuations.Client\Futures.continuations.Client.csproj", "{813B05FE-BF21-42E4-9D56-87A5324BC0FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,18 @@ Global
 		{C4EF1B8A-6D6C-49D7-AF38-00F0F9910DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4EF1B8A-6D6C-49D7-AF38-00F0F9910DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4EF1B8A-6D6C-49D7-AF38-00F0F9910DEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C8A70C3-3D37-41A3-A0B6-A1D6D3B62BB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C8A70C3-3D37-41A3-A0B6-A1D6D3B62BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C8A70C3-3D37-41A3-A0B6-A1D6D3B62BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C8A70C3-3D37-41A3-A0B6-A1D6D3B62BB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61CFD21D-301D-4080-BF21-57F14D56A734}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61CFD21D-301D-4080-BF21-57F14D56A734}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61CFD21D-301D-4080-BF21-57F14D56A734}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61CFD21D-301D-4080-BF21-57F14D56A734}.Release|Any CPU.Build.0 = Release|Any CPU
+		{813B05FE-BF21-42E4-9D56-87A5324BC0FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{813B05FE-BF21-42E4-9D56-87A5324BC0FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{813B05FE-BF21-42E4-9D56-87A5324BC0FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{813B05FE-BF21-42E4-9D56-87A5324BC0FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

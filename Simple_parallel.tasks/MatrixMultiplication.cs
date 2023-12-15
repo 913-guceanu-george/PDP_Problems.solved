@@ -41,7 +41,7 @@ static class MatrixMultiplication
     static void InitializeMatrices()
     {
         // Initialize matrices with random values for demonstration
-        Random rand = new Random();
+        Random rand = new();
         MatrixA = new int[MatrixSize, MatrixSize];
         MatrixB = new int[MatrixSize, MatrixSize];
         ResultMatrix = new int[MatrixSize, MatrixSize];
