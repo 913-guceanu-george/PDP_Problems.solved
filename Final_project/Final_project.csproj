@@ -7,4 +7,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Graphics" Version="8.0.3+2-sha.1ebb238ff3-azdo.8651303" />
+    <PackageReference Include="OpenTK" Version="4.8.2" />
+    <PackageReference Include="OpenTK.Core" Version="4.8.2" />
+    <PackageReference Include="OpenTK.Graphics" Version="4.8.2" />
+    <PackageReference Include="OpenTK.Mathematics" Version="4.8.2" />
+    <PackageReference Include="OpenTK.Windowing.Common" Version="4.8.2" />
+
+  </ItemGroup>
+
 </Project>
