@@ -10,7 +10,7 @@ namespace Final_project.Renderer
     public class MainWindow : GameWindow
     {
         private readonly NBodySimulation simulation;
-        private readonly int numBodies = 100;
+        private readonly int numBodies = 500;
         private readonly float timeStepSize = 0.1f;
         private readonly float pointSize = 4f;
         private int _vertexBufferObject;
@@ -26,7 +26,7 @@ namespace Final_project.Renderer
         protected override void OnLoad()
         {
             base.OnLoad();
-            GL.ClearColor(Color4.Aqua);
+            GL.ClearColor(Color4.Black);
             GL.PointSize(pointSize);
 
             float[] vertices = new float[numBodies * 3];
@@ -54,18 +54,6 @@ namespace Final_project.Renderer
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
-            // base.OnUpdateFrame(e);
-            // Update simulation logic here
-            // for (float step = 0; step < timeStepSize; step += 0.5f)
-            // {
-            //     Parallel.ForEach(simulation.bodies, (body, state) =>
-            //     {
-            //         System.Numerics.Vector3 acceleration = simulation.ComputeAcceleration(body);
-            //         simulation.UpdateBody(body, acceleration, timeStepSize);
-            //     });
-            // }
-
-            // GL.GetError();
             for (float step = 0; step < timeStepSize; step += 0.01f)
             {
                 Parallel.ForEach(simulation.bodies, (body, state) =>

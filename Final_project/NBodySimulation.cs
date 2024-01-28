@@ -65,14 +65,17 @@ namespace Final_project.NBodySim
 
             for (int i = 0; i < numBodies; i++)
             {
+                float x = (float)random.NextDouble();
+                float y = (float)random.NextDouble();
+                float z = (float)random.NextDouble();
                 Body body = new Body
                 {
                     Id = i,
-                    Mass = (float)random.NextDouble() * 10f, // Random mass between 0 and 1e24
+                    Mass = (float)random.NextDouble() * 10f, // Random mass between 0 and 10f
                     Position = new Vector3(
-                        (float)random.NextDouble() * -0.5f, // Random x position between 0 and 1e6
-                        (float)random.NextDouble() * -0.5f, // Random y position between 0 and 1e6
-                        (float)random.NextDouble()  // Random z position between 0 and 1e6
+                        x % 2 == 0 ? -x : x * 0.7f,
+                        y % 3 == 0 ? y : y * (0.5f),
+                        z % 5 == 0 ? -z : z * (-1.3f)
                     ),
                     Velocity = new Vector3(
                         (float)random.NextDouble() / 1e8f, // Random x velocity between 0 and 1000
